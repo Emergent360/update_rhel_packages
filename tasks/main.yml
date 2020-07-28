@@ -4,6 +4,7 @@
   dnf:
     name: "*"
     state: latest
+    update_only: yes
     security: yes
   register: dnf_update
   until: dnf_update is not failed
