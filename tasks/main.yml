@@ -2,7 +2,7 @@
 # tasks file for update_rhel_packages
 - name: Update RHEL packages for security
   dnf:
-    name: "*"
+    name: "dnf"
     state: latest
     update_only: yes
     security: yes
