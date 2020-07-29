@@ -2,21 +2,19 @@
 # tasks file for update_rhel_packages
 - name: Update RHEL packages for security
   dnf:
-    name: "dnf"
+    name: "*"
     state: latest
     update_only: yes
-    security: yes
-    skip_broken: yes
+    security: no
+    skip_broken: no
   register: dnf_update
   until: dnf_update is not failed
   retries: 5
 
+- name: Show dnf results
 - debug:
     msg: "{{ dnf_update }}"
 
-- name: Show all variables
-  debug: msg="{{ lookup('varnames', '.+')}}"
-  
 - name: Update stage to updated
   set_fact:
     provisioning_stage: "updated"
