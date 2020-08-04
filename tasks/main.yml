@@ -2,7 +2,7 @@
 # tasks file for update_rhel_packages
 - name: Update RHEL packages for security
   command: /bin/dnf -y update --security
-  warn: no
+    warn: no
   become: yes
   register: dnf_update
   until: dnf_update is not failed
