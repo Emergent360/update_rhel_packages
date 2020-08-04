@@ -3,7 +3,6 @@
 - name: Update RHEL packages for security
   command: /bin/dnf -y update --security
   become: yes
-  warn: false
   register: dnf_update
   until: dnf_update is not failed
   retries: 5
