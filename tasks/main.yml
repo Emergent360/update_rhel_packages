@@ -11,7 +11,7 @@
     name: "*"
     state: latest
     disablerepo: "*"
-    enablerepo: "rhel-8-for-x86_64-appstream-rpms,rhel-8-for-x86_64-baseos-rpms,satellite-tools-6.?-for-rhel-8-x86_64-rpms"
+    enablerepo: "rhui-client-config-server-8, rhui-rhel-8-appstream-rhui-rpms, rhui-rhel-8-baseos-rhui-rpms"
     exclude: ""
     security: yes
   become: yes
