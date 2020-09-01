@@ -1,5 +1,18 @@
 ---
 # tasks file for update_rhel_packages
+- name: Check update for security
+  command: /bin/dnf check-update
+  args:
+    warn: no
+  become: yes
+  register: check-update
+  until: check_update is not failed
+  retries: 5
+
+- name: Show check results
+  debug:
+    msg: "{{ check_update }}"
+
 - name: Update RHEL packages for security
   command: /bin/dnf -y update --security
   args:
