@@ -13,7 +13,8 @@
 
 - name: Show check results
   debug:
-    msg: "{{ check_update }}"
+    msg: "Security updates needed"
+  when: check_update.rc == 100
 
 - name: Update RHEL packages for security
   command: /bin/dnf -y update --security
