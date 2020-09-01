@@ -35,8 +35,8 @@
 - name: Check for reboot needed
   command: /usr/bin/needs-restarting -r
   register: needs_reboot
+  failed_when: needs_reboot.rc >= 2
 
 - debug:
     msg: "{{ needs_reboot }}"
   when: needs_reboot.rc == 1
-  failed_when: needs_reboot.rc >= 2
