@@ -5,7 +5,7 @@
   args:
     warn: no
   become: yes
-  register: check-update
+  register: check_update
   until: check_update is not failed
   retries: 5
 
