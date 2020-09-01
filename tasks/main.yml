@@ -30,6 +30,7 @@
 - name: Show dnf results
   debug:
     msg: "{{ dnf_update }}"
+  when dnf_update.changed
 
 #- name: Update stage to updated
 #  set_fact:
