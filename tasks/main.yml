@@ -7,6 +7,7 @@
   become: yes
   register: check_update
   failed_when: check_update.rc == 1
+  changed_when: False
   until: check_update is not failed
   retries: 5
 
