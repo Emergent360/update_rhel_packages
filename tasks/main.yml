@@ -21,6 +21,8 @@
     warn: no
   become: yes
   register: dnf_update
+  failed_when: dnf_update.rc != 0
+  changed_when: False
   until: dnf_update is not failed
   retries: 5
 
