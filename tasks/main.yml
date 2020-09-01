@@ -37,7 +37,6 @@
   register: needs_reboot
 
 - debug:
-    msg: "reboot needed"
     msg: "{{ needs_reboot }}"
   when: needs_reboot.rc == 1
   failed_when: needs_reboot.rc >= 2
