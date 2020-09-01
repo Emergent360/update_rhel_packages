@@ -38,5 +38,5 @@
   failed_when: needs_reboot.rc >= 2
 
 - debug:
-    msg: "{{ needs_reboot }}"
+    msg: "{{ needs_reboot.stdout_lines }}"
   when: needs_reboot.rc == 1
