@@ -32,8 +32,12 @@
     msg: "{{ dnf_update }}"
   when: dnf_update.changed
 
-#- name: Update stage to updated
-#  set_fact:
-#    provisioning_stage: "updated"
-#    cacheable: yes
-#  when: dnf_update is not failed
+- name: Check for reboot needed
+  command: /usr/bin/needs-restarting -r
+  register: needs_reboot
+
+- debug:
+    msg: "reboot needed"
+    msg: "{{ needs_reboot }}"
+  when: needs_reboot.rc == 1
+
