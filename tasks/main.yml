@@ -21,7 +21,7 @@
   failed_when: dnf_update.rc != 0
   until: dnf_update is not failed
   retries: 5
-  when: dnf_security | bool
+  when: not dnf_check | bool and dnf_security | bool
 
 - name: Check update for all
   command: /bin/dnf check-update
@@ -44,7 +44,7 @@
   failed_when: dnf_update.rc != 0
   until: dnf_update is not failed
   retries: 5
-  when: not dnf_security | bool
+  when: not dnf_check | bool and not dnf_security | bool
 
 - name: Check for reboot needed
   command: /usr/bin/needs-restarting -r
