@@ -59,7 +59,7 @@
   become: true
   async: 30
   poll: 0
-  when: needs_reboot.rc == 1
+  when: not dnf_check | bool and needs_reboot.rc == 1
 
 - name: Wait for reboot to complete and SSH to become available
   local_action: wait_for host={{ inventory_hostname }} port=22
