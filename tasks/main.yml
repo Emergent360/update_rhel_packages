@@ -4,3 +4,4 @@
   dnf:
     list: updates
   register: dnf_check_output
+  when: dnf_check | bool
