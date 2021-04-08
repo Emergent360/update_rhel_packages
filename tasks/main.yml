@@ -1,42 +1,6 @@
 ---
 # tasks file for update_rhel_packages
-- name: Check update for security
-  command: /bin/dnf check-update --security
-  args:
-    warn: no
-  become: yes
-  register: check_update
-  failed_when: check_update.rc == 1
-  changed_when: False
-  until: check_update is not failed
-  retries: 5
-
-- name: Show check results
-  debug:
-    msg: "Security updates needed"
-  when: check_update.rc == 100
-
-- name: Update RHEL packages for security
-  command: /bin/dnf -y update --security
-  args:
-    warn: no
-  become: yes
-  register: dnf_update
-  failed_when: dnf_update.rc != 0
-  until: dnf_update is not failed
-  retries: 5
-  when: check_update.rc == 100
-
-- name: Show dnf results
-  debug:
-    msg: "{{ dnf_update }}"
-  when: dnf_update.changed
-
-- name: Check for reboot needed
-  command: /usr/bin/needs-restarting -r
-  register: needs_reboot
-  failed_when: needs_reboot.rc >= 2
-
-- debug:
-    msg: "{{ needs_reboot.stdout_lines }}"
-  when: needs_reboot.rc == 1
+- name: Check for updates
+  dnf:
+    list: updates
+  register: dnf_check_output
