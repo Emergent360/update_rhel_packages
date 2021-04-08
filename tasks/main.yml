@@ -12,6 +12,17 @@
   retries: 5
   when: dnf_check | bool and dnf_security | bool
 
+- name: Update RHEL packages for security
+  command: /bin/dnf -y update --security
+  args:
+    warn: no
+  become: yes
+  register: dnf_update
+  failed_when: dnf_update.rc != 0
+  until: dnf_update is not failed
+  retries: 5
+  when: check_update.rc == 100 and dnf_security | bool
+
 - name: Check update for all
   command: /bin/dnf check-update
   args:
@@ -23,3 +34,14 @@
   until: check_update is not failed
   retries: 5
   when: dnf_check | bool and not dnf_security | bool
+
+- name: Update RHEL packages for all
+  command: /bin/dnf -y update
+  args:
+    warn: no
+  become: yes
+  register: dnf_update
+  failed_when: dnf_update.rc != 0
+  until: dnf_update is not failed
+  retries: 5
+  when: check_update.rc == 100 and not dnf_security | bool
