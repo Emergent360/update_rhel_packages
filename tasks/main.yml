@@ -66,4 +66,4 @@
     state=started delay=30 timeout=600
   retries: 30
   delay: 10
-  when: needs_reboot.rc == 1
+  when: not dnf_check | bool and needs_reboot.rc == 1
