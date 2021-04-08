@@ -11,3 +11,15 @@
   until: check_update is not failed
   retries: 5
   when: dnf_check | bool and dnf_security | bool
+
+- name: Check update for all
+  command: /bin/dnf check-update
+  args:
+    warn: no
+  become: yes
+  register: check_update
+  failed_when: check_update.rc == 1
+  changed_when: False
+  until: check_update is not failed
+  retries: 5
+  when: dnf_check | bool and not dnf_security | bool
