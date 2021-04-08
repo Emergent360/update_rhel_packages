@@ -50,3 +50,10 @@
   command: /usr/bin/needs-restarting -r
   register: needs_reboot
   failed_when: needs_reboot.rc >= 2
+
+- name: Reboot if necessary
+      command: shutdown -r now "Reboot due to DNF Updates"
+      become: true
+      async: 30
+      poll: 0
+      when: needs_reboot.rc == 1
