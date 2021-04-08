@@ -21,7 +21,7 @@
   failed_when: dnf_update.rc != 0
   until: dnf_update is not failed
   retries: 5
-  when: check_update.rc == 100 and dnf_security | bool
+  when: dnf_security | bool
 
 - name: Check update for all
   command: /bin/dnf check-update
@@ -44,4 +44,4 @@
   failed_when: dnf_update.rc != 0
   until: dnf_update is not failed
   retries: 5
-  when: check_update.rc == 100 and not dnf_security | bool
+  when: not dnf_security | bool
