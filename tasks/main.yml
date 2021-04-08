@@ -45,3 +45,8 @@
   until: dnf_update is not failed
   retries: 5
   when: not dnf_security | bool
+
+- name: Check for reboot needed
+  command: /usr/bin/needs-restarting -r
+  register: needs_reboot
+  failed_when: needs_reboot.rc >= 2
