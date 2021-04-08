@@ -3,5 +3,6 @@
 - name: Check for updates
   dnf:
     list: updates
+    security: "{{ dnf_security }}"
   register: dnf_check_output
   when: dnf_check | bool
