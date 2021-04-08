@@ -49,6 +49,7 @@
 - name: Check for reboot needed
   command: /usr/bin/needs-restarting -r
   register: needs_reboot
+  ignore_errors: yes
   failed_when: needs_reboot.rc >= 2
 
 - name: Reboot if necessary
